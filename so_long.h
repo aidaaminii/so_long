@@ -1,30 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   so_long.h                                          :+:      :+:    :+:   */
+/*   map_load_utils.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aamini <aamini@student.42.fr>              +#+  +:+       +#+        */
+/*   By: aamini <aamini@student.42.fr>          +#+  +:+       +#+            */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/07/24 17:06:13 by aamini            #+#    #+#             */
-/*   Updated: 2025/07/24 17:14:32 by aamini           ###   ########.fr       */
+/*   Created: 2025/07/29 00:00:00 by aamini           #+#    #+#              */
+/*   Updated: 2025/07/29 00:00:00 by aamini          ###   ########.fr        */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef SO_LONG_H
-#define SO_LONG_H
+# define SO_LONG_H
 
-#include <stdlib.h>
-#include <unistd.h>
-#include <fcntl.h>
-#include <stdio.h>
-#include "libft/libft.h"
-#include "MLX42/include/MLX42/MLX42.h"
+# include <stdlib.h>
+# include <unistd.h>
+# include <fcntl.h>
+# include <stdio.h>
+# include "libft/libft.h"
+# include "MLX42/include/MLX42/MLX42.h"
 
-#define TILE_SIZE 64
-#define MAX_LINE_LENGTH 1024
-#define MAX_BUFFER_SIZE 1024
-#define MAX_SCREEN_WIDTH 1920
-#define MAX_SCREEN_HEIGHT 1080
+# define TILE_SIZE 64
+# define MAX_LINE_LENGTH 1024
+# define MAX_BUFFER_SIZE 1024
+# define MAX_SCREEN_WIDTH 1920
+# define MAX_SCREEN_HEIGHT 1080
 
 typedef struct s_asset_count
 {
@@ -36,70 +36,68 @@ typedef struct s_asset_count
 
 typedef struct s_point
 {
-	int x;
-	int y;
-} t_point;
+	int	x;
+	int	y;
+}	t_point;
 
 typedef struct s_map
 {
-	char **area;
-	int width;
-	int height;
-
-	int total_players;
-	int total_exits;
-	int total_collectibles;
-	int total_unknowns;
-} t_map;
+	char	**area;
+	int		width;
+	int		height;
+	int		total_players;
+	int		total_exits;
+	int		total_collectibles;
+	int		total_unknowns;
+}	t_map;
 
 typedef struct s_game
 {
-	t_map *map;
-	mlx_t *mlx;
-	mlx_texture_t *wall_tx;
-	mlx_texture_t *floor_tx;
-	mlx_texture_t *player_tx;
-	mlx_texture_t *exit_tx;
-	mlx_texture_t *collectible_tx;
-	mlx_image_t *wall_pic;
-	mlx_image_t *floor_pic;
-	mlx_image_t *player_pic;
-	mlx_image_t *exit_pic;
-	mlx_image_t *collectible_pic;
+	t_map			*map;
+	mlx_t			*mlx;
+	mlx_texture_t	*wall_tx;
+	mlx_texture_t	*floor_tx;
+	mlx_texture_t	*player_tx;
+	mlx_texture_t	*exit_tx;
+	mlx_texture_t	*collectible_tx;
+	mlx_image_t		*wall_pic;
+	mlx_image_t		*floor_pic;
+	mlx_image_t		*player_pic;
+	mlx_image_t		*exit_pic;
+	mlx_image_t		*collectible_pic;
+	int				x_position;
+	int				y_position;
+	int				exit_x_position;
+	int				exit_y_position;
+	int				collected_ones;
+}	t_game;
 
-	int x_position;
-	int y_position;
-	int exit_x_position;
-	int exit_y_position;
-	int collected_ones;
-} t_game;
-
-int check_map_filename(char *filename);
-t_map *load_map_from_file(char *filename);
-int validate_map(t_map *map);
-int check_path_to_exit(t_map *map);
-char *read_file_content(int fd);
-char *resize_content(char *content, size_t total_size,
-					 size_t bytes_read, char *buffer);
-char *extract_line(char *content, int *index);
-t_map *convert_to_map(char *file_content, int height);
-t_map *free_partial_map(char **area, int index, t_map *map);
-char **allocate_area(int height);
-int get_line_length(char *content, int index);
-int find_char(t_map *map, char c, int *x, int *y);
-void start_position(t_game *game);
-int init_variables(t_game *game);
-void init_game_tx(t_game *game);
-void init_game_pics(t_game *game);
-void render_map(t_game *game);
-void handle_input(mlx_key_data_t keydata, void *param);
-void update_display(t_game *game);
-void set_map_assets(t_map *map, t_asset_count *counts);
-void rendering_map_exit(t_game *game);
-void rendering_map_collectible(t_game *game);
-void rendering_map_player(t_game *game);
-void rendering_map_floor(t_game *game);
-void rendering_map_wall(t_game *game);
-void rendering_map_floor_everywhere(t_game *game);
+int		check_map_filename(char *filename);
+t_map	*load_map_from_file(char *filename);
+int		validate_map(t_map *map);
+int		check_path_to_exit(t_map *map);
+char	*read_file_content(int fd);
+char	*resize_content(char *content, size_t total_size,
+			size_t bytes_read, char *buffer);
+char	*extract_line(char *content, int *index);
+t_map	*convert_to_map(char *file_content, int height);
+t_map	*free_partial_map(char **area, int index, t_map *map);
+int		find_char(t_map *map, char c, int *x, int *y);
+void	start_position(t_game *game);
+int		init_variables(t_game *game);
+void	init_game_tx(t_game *game);
+void	init_game_pics(t_game *game);
+void	render_map(t_game *game);
+void	handle_input(mlx_key_data_t keydata, void *param);
+void	update_display(t_game *game);
+void	set_map_assets(t_map *map, t_asset_count *counts);
+void	rendering_map_exit(t_game *game);
+void	rendering_map_collectible(t_game *game);
+void	rendering_map_player(t_game *game);
+void	rendering_map_floor(t_game *game);
+void	rendering_map_wall(t_game *game);
+void	rendering_map_floor_everywhere(t_game *game);
+char	**allocate_area(int height);
+int		get_line_length(char *content, int index);
 
 #endif
