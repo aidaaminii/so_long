@@ -26,6 +26,14 @@
 #define MAX_SCREEN_WIDTH 1920
 #define MAX_SCREEN_HEIGHT 1080
 
+typedef struct s_asset_count
+{
+	int	players;
+	int	collectibles;
+	int	exits;
+	int	unknowns;
+}	t_asset_count;
+
 typedef struct s_point
 {
 	int x;
@@ -70,6 +78,14 @@ int check_map_filename(char *filename);
 t_map *load_map_from_file(char *filename);
 int validate_map(t_map *map);
 int check_path_to_exit(t_map *map);
+char *read_file_content(int fd);
+char *resize_content(char *content, size_t total_size,
+					 size_t bytes_read, char *buffer);
+char *extract_line(char *content, int *index);
+t_map *convert_to_map(char *file_content, int height);
+t_map *free_partial_map(char **area, int index, t_map *map);
+char **allocate_area(int height);
+int get_line_length(char *content, int index);
 int find_char(t_map *map, char c, int *x, int *y);
 void start_position(t_game *game);
 int init_variables(t_game *game);
@@ -78,7 +94,7 @@ void init_game_pics(t_game *game);
 void render_map(t_game *game);
 void handle_input(mlx_key_data_t keydata, void *param);
 void update_display(t_game *game);
-void set_map_assets(t_map *map, int *players, int *collectibles, int *exits, int *unknowns);
+void set_map_assets(t_map *map, t_asset_count *counts);
 void rendering_map_exit(t_game *game);
 void rendering_map_collectible(t_game *game);
 void rendering_map_player(t_game *game);
