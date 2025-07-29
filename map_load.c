@@ -16,14 +16,14 @@ int count_lines(char *content)
   return (count + 1);
 }
 
-char	**allocate_area(int height)
+char **allocate_area(int height)
 {
-	char	**area;
+  char **area;
 
-	area = malloc((height + 1) * sizeof(char *));
-	if (!area)
-		ft_putstr_fd("Error: Memory allocation failed for area\n", 2);
-	return (area);
+  area = malloc((height + 1) * sizeof(char *));
+  if (!area)
+    ft_putstr_fd("Error: Memory allocation failed for area\n", 2);
+  return (area);
 }
 
 int get_line_length(char *content, int index)
@@ -41,19 +41,6 @@ int get_line_length(char *content, int index)
     }
   }
   return (len);
-}
-
-int check_map_filename(char *filename)
-{
-  int len;
-
-  // ex: fun_map.ber
-  len = ft_strlen(filename);
-  if (len < 5)
-    return (1);
-  if (ft_strncmp(filename + len - 4, ".ber", 4) != 0)
-    return (1);
-  return (0);
 }
 
 static char *resize_content(char *content, size_t total_size,
@@ -101,10 +88,10 @@ char *extract_line(char *content, int *index)
   return (line);
 }
 
-t_map* convert_to_map(char *file_content, int height)
+t_map *convert_to_map(char *file_content, int height)
 {
-  char** area;
-  t_map* map;
+  char **area;
+  t_map *map;
   int i;
   int index;
   int width;
@@ -168,11 +155,36 @@ char *read_file_content(int fd)
   return (file_content);
 }
 
-t_map* load_map_from_file(char *filename)
+void set_map_assets(t_map *map, int *players, int *collectibles, int *exits, int *unknowns)
+{
+  int i;
+  int j;
+
+  i = 0;
+  while (map->area[i])
+  {
+    j = 0;
+    while (map->area[i][j])
+    {
+      if (map->area[i][j] == 'P')
+        (*players)++;
+      else if (map->area[i][j] == 'C')
+        (*collectibles)++;
+      else if (map->area[i][j] == 'E')
+        (*exits)++;
+      else if (map->area[i][j] != '1' && map->area[i][j] != '0')
+        (*unknowns)++;
+      j++;
+    }
+    i++;
+  }
+}
+
+t_map *load_map_from_file(char *filename)
 {
   int fd;
   int height;
-  t_map* map;
+  t_map *map;
   char *file_content;
 
   fd = open(filename, O_RDONLY);
@@ -187,47 +199,7 @@ t_map* load_map_from_file(char *filename)
     return (NULL);
   height = count_lines(file_content);
   map = convert_to_map(file_content, height);
+  set_map_assets(map, &map->total_players, &map->total_collectibles, &map->total_exits, &map->total_unknowns);
   free(file_content);
   return (map);
-}
-
-int validate_walls(t_map map)
-{
-  int i;
-  i = 0;
-
-  while (i < map.width) 
-  {
-    if (map.area[0][i] != '1' || map.area[map.height - 1][i] != '1')
-      return (1);
-  }
-
-  while (i < map.height)
-  {
-    if (map.area[i][0] != '1' || map.area[i][map.width - 1] != '1')
-      return (1);
-  }
-  return (0);
-}
-
-int validate_map(t_map map)
-{
-  int i;
-  int width;
-
-  i = 0;
-  width = map.width;
-  while (i < map.height) 
-  {
-    int tmp;
-    tmp = ft_strlen(map.area[i]);
-    if (tmp != width) 
-    {
-      ft_putstr_fd("Error\nInvalid map, check each rows.\n", 2);
-      return (1);
-    }
-    i++;
-  }
-
-  return (validate_walls(map));
 }

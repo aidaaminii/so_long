@@ -3,6 +3,10 @@
     "files.associations": {
         "stdlib.h": "c",
         "stdio.h": "c",
-        "mlx42.h": "c"
+        "mlx42.h": "c",
+        "libft.h": "c",
+        "so_long.h": "c",
+        "queue": "c",
+        "stack": "c"
     }
 }

@@ -1,7 +1,12 @@
 NAME = so_long
 
-SRCS = so_long.c \
-		map.c
+SRCS =  so_long.c \
+		map_load.c \
+		map_validate.c \
+		map_accessibility.c \
+		position.c \
+		variables.c \
+		graphics.c
 
 OBJS = $(SRCS:.c=.o)
 

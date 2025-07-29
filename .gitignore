@@ -2,3 +2,5 @@ libft/*.o
 libft/libft.a
 so_long.o
 /*.o
+so_long
+.DS_Store
