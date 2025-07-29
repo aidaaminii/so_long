@@ -6,7 +6,9 @@ SRCS =  so_long.c \
 		map_accessibility.c \
 		position.c \
 		variables.c \
-		graphics.c
+		graphics.c \
+		graphics_render.c \
+		graphics_utils.c
 
 OBJS = $(SRCS:.c=.o)
 

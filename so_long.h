@@ -26,6 +26,12 @@
 #define MAX_SCREEN_WIDTH 1920
 #define MAX_SCREEN_HEIGHT 1080
 
+typedef struct s_point
+{
+	int x;
+	int y;
+} t_point;
+
 typedef struct s_map
 {
 	char **area;
@@ -73,5 +79,11 @@ void render_map(t_game *game);
 void handle_input(mlx_key_data_t keydata, void *param);
 void update_display(t_game *game);
 void set_map_assets(t_map *map, int *players, int *collectibles, int *exits, int *unknowns);
+void rendering_map_exit(t_game *game);
+void rendering_map_collectible(t_game *game);
+void rendering_map_player(t_game *game);
+void rendering_map_floor(t_game *game);
+void rendering_map_wall(t_game *game);
+void rendering_map_floor_everywhere(t_game *game);
 
 #endif
