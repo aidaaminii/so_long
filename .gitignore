@@ -5,3 +5,8 @@ so_long.o
 so_long
 .DS_Store
 /MLX42
+
+# valgrind
+docker-compose.yml
+run_valgrind.sh
+mlx_suppressions.supp

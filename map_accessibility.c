@@ -37,7 +37,7 @@ char	**reproduce_map(t_map *map)
 	return (copy);
 }
 
-void	free_map(char **map)
+void	free_map_array(char **map)
 {
 	int	i;
 
@@ -100,10 +100,10 @@ int	check_path_to_exit(t_map *map)
 		return (ft_putstr_fd("Error\nMemory allocation failed\n", 2), 1);
 	if (!find_char(map, 'P', &player.x, &player.y)
 		|| !find_char(map, 'E', &exit.x, &exit.y))
-		return (free_map(copy_map),
+		return (free_map_array(copy_map),
 			ft_putstr_fd("Error: missing P or E\n", 2), 1);
 	result = dfs_path(copy_map, player, exit);
-	free_map(copy_map);
+	free_map_array(copy_map);
 	if (!result)
 		ft_putstr_fd("Error\nInvalid map: No path from P to E\n", 2);
 	return (!result);

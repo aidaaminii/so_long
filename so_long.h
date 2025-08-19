@@ -99,5 +99,7 @@ void	rendering_map_wall(t_game *game);
 void	rendering_map_floor_everywhere(t_game *game);
 char	**allocate_area(int height);
 int		get_line_length(char *content, int index);
+void	cleanup_game(t_game *game);
+void	free_map(t_map *map);
 
 #endif

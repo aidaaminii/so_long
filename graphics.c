@@ -15,8 +15,7 @@
 void	graphic_error(char *msg, t_game *game)
 {
 	ft_putstr_fd(msg, 2);
-	if (game->mlx)
-		mlx_terminate(game->mlx);
+	cleanup_game(game);
 	exit(EXIT_FAILURE);
 }
 

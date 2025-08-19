@@ -9,7 +9,8 @@ SRCS =  so_long.c \
 		variables.c \
 		graphics.c \
 		graphics_render.c \
-		graphics_utils.c
+		graphics_utils.c \
+		cleanup.c
 
 OBJS = $(SRCS:.c=.o)
 
