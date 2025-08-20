@@ -1,0 +1,30 @@
+{
+   MLX_All_Leaks
+   Memcheck:Leak
+   ...
+   fun:*mlx*
+}
+{
+   OpenGL_All_Leaks
+   Memcheck:Leak
+   ...
+   fun:*gl*
+}
+{
+   GLFW_All_Leaks
+   Memcheck:Leak
+   ...
+   fun:*glfw*
+}
+{
+   Graphics_Library_Leaks
+   Memcheck:Leak
+   ...
+   obj:*/libmlx42.a
+}
+{
+   System_OpenGL_Leaks
+   Memcheck:Leak
+   ...
+   obj:*/libGL.so*
+}
