@@ -49,6 +49,7 @@ clean:
 	make clean -C libft
 	rm -f $(OBJS)
 	rm -rf $(LIBMLX)
+	rm so_long
 
 fclean: clean
 	make fclean -C libft
