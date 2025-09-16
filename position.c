@@ -52,6 +52,10 @@ void	move(t_game *game, int delta_x, int delta_y)
 	new_y = game->y_position + delta_y;
 	if (!is_valid_move(game, new_x, new_y))
 		return ;
+	game->moves += abs(delta_x) + abs(delta_y);
+	ft_putstr_fd("Moves: ", 1);
+	ft_putnbr_fd(game->moves, 1);
+	ft_putchar_fd('\n', 1);
 	handle_collectible(game, new_x, new_y);
 	game->x_position = new_x;
 	game->y_position = new_y;

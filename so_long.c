@@ -45,4 +45,5 @@ int	main(int argc, char **argv)
 		return (ft_putstr_fd("Error\nUsage is: ./so_long map.ber\n", 2), 1);
 	mlx_key_hook(game.mlx, handle_input, &game);
 	mlx_loop(game.mlx);
+	cleanup_game(&game);
 }

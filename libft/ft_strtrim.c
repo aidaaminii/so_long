@@ -23,7 +23,7 @@ char	*ft_strtrim(char const *s1, char const *set)
 	j = ft_strlen(s1);
 	while (s1[i] && ft_strchr(set, s1[i]))
 		i++;
-	while (s1[j - 1] && ft_strchr(set, s1[j - 1]))
+	while (j > 0 && s1[j - 1] && ft_strchr(set, s1[j - 1]))
 		j--;
 	if (i > j)
 		i = j;

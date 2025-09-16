@@ -42,6 +42,11 @@ int	get_line_length(char *content, int index)
 {
 	int	len;
 
+	if (!content)
+	{
+		ft_putstr_fd("Error\nContent is empty\n", 2);
+		return (-1);
+	}
 	len = 0;
 	while (content[index + len] && content[index + len] != '\n')
 	{

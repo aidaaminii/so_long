@@ -38,5 +38,17 @@ void	cleanup_game(t_game *game)
 	if (game->map)
 		free_map(game->map);
 	if (game->mlx)
+	{
+		if (game->wall_tx)
+			mlx_delete_texture(game->wall_tx);
+		if (game->floor_tx)
+			mlx_delete_texture(game->floor_tx);
+		if (game->player_tx)
+			mlx_delete_texture(game->player_tx);
+		if (game->collectible_tx)
+			mlx_delete_texture(game->collectible_tx);
+		if (game->exit_tx)
+			mlx_delete_texture(game->exit_tx);
 		mlx_terminate(game->mlx);
+	}
 }

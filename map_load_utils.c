@@ -38,6 +38,8 @@ char	*extract_line(char *content, int *index)
 	char	*line;
 	int		i;
 
+	if (!content || !index)
+		return (NULL);
 	len = get_line_length(content, *index);
 	if (len == -1)
 		return (NULL);

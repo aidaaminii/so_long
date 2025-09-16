@@ -70,6 +70,7 @@ typedef struct s_game
 	int				exit_x_position;
 	int				exit_y_position;
 	int				collected_ones;
+	int				moves;
 }	t_game;
 
 int		check_map_filename(char *filename);
