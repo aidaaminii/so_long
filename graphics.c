@@ -56,12 +56,31 @@ void	init_game_pics(t_game *game)
 
 void	render_map(t_game *game)
 {
-	rendering_map_floor_everywhere(game);
-	rendering_map_floor(game);
-	rendering_map_wall(game);
-	rendering_map_player(game);
-	rendering_map_collectible(game);
-	rendering_map_exit(game);
+	int			x;
+	int			y;
+	mlx_image_t	*m;
+
+	y = 0;
+	while (y < game->map->height)
+	{
+		x = 0;
+		while (x < game->map->width)
+		{
+			m = game->floor_pic;
+			mlx_image_to_window(game->mlx, m, x * TILE_SIZE, y * TILE_SIZE);
+			if (game->map->area[y][x] == 'P')
+				m = game->player_pic;
+			else if (game->map->area[y][x] == 'E')
+				m = game->exit_pic;
+			else if (game->map->area[y][x] == 'C')
+				m = game->collectible_pic;
+			else if (game->map->area[y][x] == '1')
+				m = game->wall_pic;
+			mlx_image_to_window(game->mlx, m, x * TILE_SIZE, y * TILE_SIZE);
+			x++;
+		}
+		y++;
+	}
 }
 
 void	update_display(t_game *game)
